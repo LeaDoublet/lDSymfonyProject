@@ -17,9 +17,6 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-/**
- * @method User getUser()
- */
 class UserCrudController extends AbstractCrudController
 {
     public function __construct(
@@ -39,6 +36,7 @@ class UserCrudController extends AbstractCrudController
        $userId = $this->getUser()->getId();
 
        $qb = $this->entityRepos->createQueryBuilder($searchDto,$entityDto,$fields,$filters);
+//       dd($qb);
        $qb->andWhere('entity.id != :userId')
            ->setParameter('userId', $userId);
 

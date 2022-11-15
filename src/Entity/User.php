@@ -14,9 +14,9 @@ use Symfony\Component\Uid\UuidV6;
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
+    #[ORM\Column(type: 'uuid', unique: true)] //Dis a doctrine c'est une colonne de ma base
     #[ORM\GeneratedValue(strategy: 'CUSTOM')] //genere une valeur auto comme id en BDD
     #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')] //genere un id chaine random car pour plus de securité
-    #[ORM\Column(type: 'uuid')] //Dis a doctrine c'est une colonne de ma base
     private ?UuidV6 $id = null;
 
     #[ORM\Column(length: 180, unique: true)] //chaine car longueur 180 unique = pas de duplication = user unique

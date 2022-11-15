@@ -27,9 +27,13 @@ class Category
     #[ORM\ManyToMany(targetEntity: Articles::class, inversedBy: 'category')]
     private Collection $articles;
 
+    #[ORM\ManyToMany(targetEntity: Video::class, mappedBy: 'categories')]
+    private Collection $videos;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->videos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -99,5 +103,32 @@ class Category
     public function __toString():string
     {
         return $this->name;
+    }
+
+    /**
+     * @return Collection<int, Video>
+     */
+    public function getVideos(): Collection
+    {
+        return $this->videos;
+    }
+
+    public function addVideo(Video $video): self
+    {
+        if (!$this->videos->contains($video)) {
+            $this->videos->add($video);
+            $video->addCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVideo(Video $video): self
+    {
+        if ($this->videos->removeElement($video)) {
+            $video->removeCategory($this);
+        }
+
+        return $this;
     }
 }

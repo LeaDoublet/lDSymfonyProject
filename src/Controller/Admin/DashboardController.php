@@ -4,7 +4,9 @@ namespace App\Controller\Admin;
 
 use App\Entity\Articles;
 use App\Entity\Category;
+use App\Entity\Media;
 use App\Entity\User;
+use App\Entity\Video;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -59,13 +61,21 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
 
-        if($this->isGranted('ROLE_AUTHOR')){
+        //if($this->isGranted('ROLE_AUTHOR')){
             yield MenuItem::subMenu('Articles', 'fas fa-newspaper')->setSubItems([
                 MenuItem::linkToCrud('Tous les articles','fas fa-newspaper',Articles::class),
                 MenuItem::linkToCrud('Ajouter','fas fa-plus',Articles::class)->setAction(Crud::PAGE_NEW),
                 MenuItem::linkToCrud('Catégories','fas fa-list',Category::class)
             ]);
-        }
+
+        yield MenuItem::subMenu('Médias', 'fas fa-photo-video')->setSubItems([
+            MenuItem::linkToCrud('Médiatheque','fas fa-photo-video',Media::class),
+            MenuItem::linkToCrud('Ajouter','fas fa-plus',Media::class)->setAction(Crud::PAGE_NEW),
+
+        ]);
+
+        yield MenuItem::linkToCrud('Vidéos', 'fas fa-video', Video::class)->setAction(Crud::PAGE_NEW);
+        //}
 
         //if($this->isGranted('ROLE_ADMIN')){
             yield MenuItem::subMenu('Comptes', 'fas fa-user')->setSubItems([
