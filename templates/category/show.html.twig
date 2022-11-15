@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ category.name }}{% endblock %}
+
+{% block main %}
+    <div>
+        <h3 class="border-bottom">{{ category.name }}</h3>
+        <div>
+            {% include 'article/list.html.twig' with {articles: category.articles} %}
+        </div>
+    </div>
+{% endblock %}

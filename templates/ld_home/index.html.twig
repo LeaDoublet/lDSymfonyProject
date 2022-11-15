@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BlogHomePage{% endblock %}
+
+{% block main %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>🍎✨ Animal Crossing blog✨🍎</h1>
+    <h2> Welcome ! </h2>
+    <h3> Articles récents : </h3>
+    <br>
+    <div id="article-list">
+        {% include 'article/list.html.twig' with { articles } %}
+    </div>
+
+    <br>
+</div>
+{% endblock %}

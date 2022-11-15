@@ -1,0 +1,21 @@
+*, *:after, *:before {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body {
+    background-color: lightpink;
+}
+.container{
+    text-align-all: justify;
+    background-color: mediumslateblue;
+}
+ul{
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+ul li{
+    display: inline-block;
+    width: 19%;
+    text-align: center;
+}
